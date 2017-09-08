@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    {% set map = {'success': 1, 'warning': 2, 'error': 3, 'info': 4} %}
+    $(document).ready(function(){
+        notie.setOptions({
+        {% for key, value in options %}
+            {% spaceless %}
+                {# if value is boolean, integer or float, do not wrap with quote #}
+                {% if value != true or value != false or value matches '/^\\d+$/' or value matches '/^[-+]?[0-9]*\\.?[0-9]+$/' %}
+                    {% set wrapper = false %}
+                {% endif %}
+                {% set wrapper = true %}
+                {{ key }}: {% if wrapper %}"{% endif %}{{ value }}{% if wrapper %}"{% endif %}
+                {% if not loop.last %},{% endif %}
+            {% endspaceless %}
+        {% endfor %}
+        });
+
+        notie.alert({{ attribute(map, type) }}, "{{ body|trans({}, translationDomain|default('messages'))|e('js')|raw }}"{% if timeout|default(false) %}, {{ timeout }}{% endif %});
+    });
+</script>

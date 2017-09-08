@@ -1,0 +1,15 @@
+<script type="text/javascript">
+    (function() {
+        var notification = new NotificationFx({
+            message : '<div>{{ body|raw|trans({}, translationDomain|default('messages')) }}</div>',
+            layout  : '{{ layout|default('growl') }}',
+            effect  : '{{ effect|default('jelly') }}',
+            ttl     : {{ timeout|default(10000) }},
+            type    : '{{ type|default('success') }}'
+        });
+
+        // show the notification
+        return notification.show();
+
+        }).call(this);
+</script>

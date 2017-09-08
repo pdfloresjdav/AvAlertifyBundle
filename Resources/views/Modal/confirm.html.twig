@@ -1,0 +1,59 @@
+<div class="modal {{ modal_class }}" id="{{ id }}" tabindex="-1" role="dialog" aria-labelledby="{{ title }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">{{ title|raw }}</h3>
+            </div>
+            <div class="modal-body">
+                {{ body|raw }}
+            </div>
+            <div class="modal-footer">
+                <button class="btn {{ cancel_button_class }}" data-dismiss="modal" aria-hidden="true">{{ cancel_button_value ? cancel_button_value : 'modal.confirm.button.cancel'|trans({}, 'alertify') }}</button>
+                <button class="btn {{ confirm_button_class }}" aria-hidden="true">{{ confirm_button_value ? confirm_button_value : 'modal.confirm.button.valid'|trans({}, 'alertify') }}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('#{{ id }}').modal({'show':true,'keyboard':true});
+    $('#{{ id }} .{{ confirm_button_class }}').focus();
+    var initierElement = $('[data-toggle="confirm-waiting"]');
+
+    $(document).on("hide.bs.modal", '#{{ id }}', function (e) {
+        $(initierElement).attr('data-toggle', 'confirm');
+        $('#{{ id }}').remove();
+    });
+    $(document).on("click", '#{{ id }} .{{ cancel_button_class }}', function(){
+      $(initierElement).attr('data-toggle', 'confirm');
+    });
+
+    {# if no callback were given, we submit or go to the url of given as parameter #}
+    {% if confirmCallback == null %}
+    $(document).on("click", '#{{ id }} .{{ confirm_button_class }}', function(){
+        {% if type == "form" %}
+            initierElement.removeAttr('toggle');
+            initierElement.submit();
+            $('#{{ id }}').modal('hide');
+        {% else %}
+            window.location = $('[data-toggle="confirm-waiting"]').attr('href');
+        {% endif %}
+    });
+    {% else %}
+    $(document).on("click", '#{{ id }} .{{ confirm_button_class }}', function(){
+            {{ confirmCallback|raw }}
+            $('#{{ id }}').modal('hide');
+        });
+    {% endif %}
+
+/*    $(document).on("focus", '#{{ id }}', function(){
+      $('#{{ id }} .{{ confirm_button_class }}').focus();
+    });
+*/
+    $('#{{ id }}').focus(function(){
+      $('#{{ id }} .{{ confirm_button_class }}').focus();
+    });
+</script>
+
+

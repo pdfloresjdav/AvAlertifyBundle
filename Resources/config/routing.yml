@@ -1,0 +1,4 @@
+av_alertify:
+    resource: "@AvAlertifyBundle/Controller/"
+    type:     annotation
+    prefix:   /

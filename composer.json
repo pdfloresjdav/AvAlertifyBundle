@@ -3,7 +3,6 @@
     "type": "symfony-bundle",
     "description": "Symfony AlertifyBundle",
     "keywords": ["alert", "bootstrap"],
-    "homepage": "https://github.com/AppVentus/AvAlertifyBundle",
     "license": "MIT",
     "require": {
         "friendsofsymfony/jsrouting-bundle": "2.0.*@dev"

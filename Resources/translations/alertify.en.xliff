@@ -12,7 +12,7 @@
             </trans-unit>
             <trans-unit id="3">
                 <source>alert.success.label</source>
-                <target>Succes</target>
+                <target>Success</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>alert.info.label</source>

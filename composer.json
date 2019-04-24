@@ -5,7 +5,7 @@
     "keywords": ["alert", "bootstrap"],
     "license": "MIT",
     "require": {
-        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev"
+        "friendsofsymfony/jsrouting-bundle": "2.0.*@dev|^2.3"
     },
     "require-dev": {
         "symfony/class-loader": "~2.1"

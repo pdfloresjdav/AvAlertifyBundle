@@ -16,7 +16,7 @@ function smartConfirm(e, element, type){
     e.preventDefault();
     $(element).attr('data-toggle', 'confirm-waiting');
     $.post(
-        Routing.generate('alertify_confirm'),
+        '/index.php/alertify/confirm',
         {
             title: $(element).attr('data-title'),
             body: $(element).attr('data-body'),

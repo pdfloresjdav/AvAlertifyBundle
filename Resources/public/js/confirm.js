@@ -15,9 +15,10 @@ function smartConfirm(e, element, type){
     }
     e.preventDefault();
     $(element).attr('data-toggle', 'confirm-waiting');
-    $.post(
-        '/index.php/alertify/confirm',
-        {
+    $.ajax({
+        method: "GET",
+        url:'/index.php/alertify/confirm',
+        data: {
             title: $(element).attr('data-title'),
             body: $(element).attr('data-body'),
             confirm_callback: $(element).attr('data-confirm-callback'),
@@ -29,8 +30,8 @@ function smartConfirm(e, element, type){
             id: $(element).attr('id'),
             type: type
         },
-        function(data){
+        success: function(data){
             $("body").append(data);
         }
-    );
+    });
 }
